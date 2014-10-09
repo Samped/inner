@@ -24,10 +24,10 @@ var object = {
 
 inner.get(object, ['user', 'friends', '0']); // -> 'Mike'
 inner.set(object, ['user', 'name'], 'Chris'); // object.user.name == 'Chris'
-inner.has(object, ['user', 'friends', '1']); // true
+inner.has(object, ['user', 'friends', '1']); // -> true
 ```
 
 Credits
 -------
 
-_Inner_ is just like (this library)[https://github.com/cowboy/node-getobject], but with support for specifying nested properties as arrays instead of strings.
+_Inner_ is just like [this library](https://github.com/cowboy/node-getobject), but with support for specifying nested properties as arrays instead of strings.
