@@ -39,3 +39,17 @@ test('Check existence of nested value', function (assert) {
   assert.equal(inner.has(data, ['b']), true);
   assert.equal(inner.has(data, ['c']), false);
 });
+
+test('Path array does not mutate', function (assert) {
+  var data = {a: {b: {c: 'yo'}}};
+  var path = ['a', 'b', 'c'];
+
+  assert.plan(3);
+
+  inner.get(data, path);
+  assert.deepEqual(path, ['a', 'b', 'c'], 'get');
+  inner.set(data, path, 'hi');
+  assert.deepEqual(path, ['a', 'b', 'c'], 'set');
+  inner.has(data, path);
+  assert.deepEqual(path, ['a', 'b', 'c'], 'has');
+});

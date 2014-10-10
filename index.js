@@ -10,8 +10,8 @@
  * @return {any}            Value inside object at path.
  */
 function get(object, path, create) {
-  while (path.length) {
-    var key = path.shift();
+  for (var i = 0; i < path.length; i++) {
+    var key = path[i];
 
     if (!object || typeof object != 'object') {
       return undefined;
@@ -37,9 +37,9 @@ function get(object, path, create) {
  * @return {Boolean}        Was the value set successfully?
  */
 function set(object, path, value) {
-  var key = path.pop();
+  var key = path[path.length - 1];
 
-  object = get(object, path, true);
+  object = get(object, path.slice(0, -1), true);
 
   if (object && typeof object == 'object') {
     object[key] = value;
@@ -57,9 +57,9 @@ function set(object, path, value) {
  * @return {Boolean}        Does path exist in object?
  */
 function has(object, path) {
-  var key = path.pop();
+  var key = path[path.length - 1];
 
-  object = get(object, path);
+  object = get(object, path.slice(0, -1));
 
   return object && typeof object == 'object' && key in object;
 }
