@@ -12,6 +12,12 @@ test('Get nested value', function (assert) {
   assert.equal(inner.get({a: [4, 5, 6]}, ['a', '1']), 5, 'array');
 });
 
+test('Get empty path', function (assert) {
+  assert.plan(1);
+
+  assert.deepEqual(inner.get({a: 1}, []), {a: 1});
+});
+
 test('Set nested value', function (assert) {
   var data = {};
 
