@@ -1,6 +1,17 @@
 'use strict';
 
 /**
+ * Check if a value is an object.
+ *
+ * @param  {any}     value The value to check
+ * @return {Boolean}       True if value is an object, false otherwise.
+ */
+function isObject(value) {
+  var type = typeof value;
+  return !!(value && type == 'object' || type == 'function');
+}
+
+/**
  * Get the value of a deeply nested property
  *
  * @param  {any}     object The object to drill into.
@@ -13,7 +24,7 @@ function get(object, path, create) {
   for (var i = 0; i < path.length; i++) {
     var key = path[i];
 
-    if (!object || typeof object != 'object') {
+    if (!isObject(object)) {
       return undefined;
     }
 
@@ -41,7 +52,7 @@ function set(object, path, value) {
 
   object = get(object, path.slice(0, -1), true);
 
-  if (object && typeof object == 'object') {
+  if (isObject(object)) {
     object[key] = value;
     return true;
   }
@@ -61,7 +72,7 @@ function has(object, path) {
 
   object = get(object, path.slice(0, -1));
 
-  return object && typeof object == 'object' && key in object;
+  return isObject(object) && key in object;
 }
 
 module.exports = {

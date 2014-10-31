@@ -12,6 +12,14 @@ test('Get nested value', function (assert) {
   assert.equal(inner.get({a: [4, 5, 6]}, ['a', '1']), 5, 'array');
 });
 
+test('Get function property', function (assert) {
+  var fn = function () {};
+  fn.a = 2;
+
+  assert.plan(1);
+  assert.equal(inner.get(fn, ['a']), 2);
+});
+
 test('Get empty path', function (assert) {
   assert.plan(1);
 
